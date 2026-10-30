@@ -1,14 +1,30 @@
-# Segredos e configuração local
+# Segredos e configuração local (nunca versionar)
 .env
+.env.*
+!.env.example
 
-# Arquivos gerados pelo fluxo durante a execução (a pasta fica, o conteúdo não)
+# Dados gerados pela execução: fichas, resultados e bancos locais.
+# A pasta data/ fica no repositório (via .gitkeep), o conteúdo não.
 data/*
 !data/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+
+# Chaves e certificados
+*.key
+*.pem
+
+# Temporários e logs
+*.tmp
+*.temp
+*.bak
+*.swp
+*.log
 
 # Sistema e editor
 .DS_Store
 Thumbs.db
-*.log
-node_modules/
 .vscode/
 .idea/
+node_modules/

@@ -6,7 +6,7 @@ Arquivo: `casos_teste.csv` (24 casos, todos **fictícios**).
 
 | Coluna | Conteúdo |
 | --- | --- |
-| id | C01 a C24 |
+| id | CT-01 a CT-24 |
 | tipo | claro, varios_sintomas, info_faltando, bagunçado, ambiguo, injecao |
 | relato | texto do atendente, como seria digitado |
 | modelo_esperado | modelo da moto ou vazio, se o relato não traz |

@@ -156,46 +156,45 @@ workflows e as credenciais.
 
 ## 11. Arquivo de referência: `docker-compose.yml`
 
-O arquivo abaixo é o que está no repositório. Não é necessário alterá-lo para rodar o
-projeto.
+O arquivo abaixo é o que está no repositório. Os valores vêm do `.env`, por isso não é preciso editá-lo.
 
 ```yaml
-# n8n local para o projeto de triagem de ordens de serviço.
-# Uso: docker compose up -d   (abrir http://localhost:5678)
-# Parar: docker compose down  (NÃO use "down -v": apaga os dados do n8n)
+# Serviço n8n do projeto OS Triage.
+# Lê N8N_VERSION e TIMEZONE do arquivo .env desta pasta (o Compose faz isso sozinho).
+# Subir:  docker compose up -d        Parar:  docker compose down
+# NUNCA use "docker compose down -v": ele apaga o volume os_triage_n8n_data,
+# que guarda workflows e as credenciais do Gemini.
 
 services:
   n8n:
-    image: docker.n8n.io/n8nio/n8n:${N8N_VERSION:-latest}
-    container_name: n8n-triagem
+    image: docker.n8n.io/n8nio/n8n:${N8N_VERSION:?Defina N8N_VERSION no arquivo .env}
+    container_name: os_triage_n8n
     restart: unless-stopped
     ports:
-      # Só acessível na própria máquina, não na rede.
+      # Publicado somente em localhost. Não fica acessível pela rede.
       - "127.0.0.1:5678:5678"
     environment:
-      - GENERIC_TIMEZONE=${TIMEZONE:-America/Sao_Paulo}
-      - TZ=${TIMEZONE:-America/Sao_Paulo}
+      - GENERIC_TIMEZONE=${TIMEZONE:?Defina TIMEZONE no arquivo .env}
+      - TZ=${TIMEZONE}
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
-      - N8N_RUNNERS_ENABLED=true
     volumes:
-      # Workflows, credenciais (inclui a chave do Gemini) e a chave de criptografia do n8n.
+      # Workflows, credenciais criptografadas e a chave de criptografia do n8n.
       - n8n_data:/home/node/.n8n
-      # Arquivos gerados pelo fluxo (fichas, resultados dos testes).
-      # A pasta de destino dentro do contêiner deve ser confirmada na Fase 1.
+      # Fichas e resultados dos testes, visíveis na pasta data/ do projeto.
+      # O caminho dentro do contêiner ainda precisa ser confirmado na Fase 1.
       - ./data:/home/node/.n8n-files
 
 volumes:
   n8n_data:
+    name: os_triage_n8n_data
 ```
 
 **Observações sobre o arquivo:**
 
-- `N8N_RUNNERS_ENABLED=true` é obsoleta a partir do n8n 2.0, segundo a documentação do
-  n8n. Pode ser removida depois que a versão estiver fixada e testada.
-- A imagem vem de `docker.n8n.io`. A documentação do n8n mostra a imagem `n8nio/n8n`.
-  Confirme na fase 1, com `docker compose pull`, que a imagem baixa normalmente.
-- O caminho `/home/node/.n8n-files` precisa ser confirmado na fase 1, como indica o próprio
-  arquivo.
+- A imagem usa a tag definida em `N8N_VERSION`. A tag `2.45.6` foi conferida no Docker Hub.
+- `N8N_RUNNERS_ENABLED` foi removida. A documentação do n8n a considera obsoleta a partir da versão 2.0.
+- O volume `os_triage_n8n_data` guarda workflows e credenciais. `docker compose down` não o apaga.
+- O caminho `/home/node/.n8n-files` ainda precisa ser confirmado na fase 1.
 
 ---
 
