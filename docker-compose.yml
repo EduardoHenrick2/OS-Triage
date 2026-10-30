@@ -1,0 +1,26 @@
+# n8n local para o projeto de triagem de ordens de serviço.
+# Uso: docker compose up -d   (abrir http://localhost:5678)
+# Parar: docker compose down  (NÃO use "down -v": apaga os dados do n8n)
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:${N8N_VERSION:-latest}
+    container_name: n8n-triagem
+    restart: unless-stopped
+    ports:
+      # Só acessível na própria máquina, não na rede.
+      - "127.0.0.1:5678:5678"
+    environment:
+      - GENERIC_TIMEZONE=${TIMEZONE:-America/Sao_Paulo}
+      - TZ=${TIMEZONE:-America/Sao_Paulo}
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - N8N_RUNNERS_ENABLED=true
+    volumes:
+      # Workflows, credenciais (inclui a chave do Gemini) e a chave de criptografia do n8n.
+      - n8n_data:/home/node/.n8n
+      # Arquivos gerados pelo fluxo (fichas, resultados dos testes).
+      # A pasta de destino dentro do contêiner deve ser confirmada na Fase 1.
+      - ./data:/home/node/.n8n-files
+
+volumes:
+  n8n_data:

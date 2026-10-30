@@ -1,0 +1,14 @@
+# Segredos e configuração local
+.env
+
+# Arquivos gerados pelo fluxo durante a execução (a pasta fica, o conteúdo não)
+data/*
+!data/.gitkeep
+
+# Sistema e editor
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.vscode/
+.idea/
