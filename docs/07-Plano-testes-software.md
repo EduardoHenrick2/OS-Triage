@@ -178,9 +178,9 @@ As metas são propostas para a versão 1 e serão ajustadas após a primeira rod
 | Urgência alta não perdida | Casos de risco classificados como alta ÷ casos de risco do gabarito | 100% |
 | Falsos alertas | Casos sem risco classificados como alta ÷ casos sem risco | 10% ou menos (a validar) |
 | Ganho da regra de segurança | Casos de risco que o LLM classificou abaixo de alta e a regra corrigiu | Informativo, sem meta |
-| Extração de modelo e ano | Campos corretos ÷ campos esperados | 90% ou mais |
+| Extração de modelo e ano | Campos corretos ÷ campos esperados, comparados com o gabarito na ficha final, depois do enriquecimento de marca no nó de código | 90% ou mais |
 | Decisão de perguntar | Casos com informação faltando em que o fluxo perguntou ÷ casos com informação faltando | 100% |
-| Invenção de dados | Casos em que o fluxo preencheu modelo ou ano ausentes no texto | 0 |
+| Invenção de dados | Casos em que a saída bruta do LLM, antes do nó de código, preencheu modelo ou ano ausentes no texto, inclusive uma marca que o próprio LLM acrescentou | 0 |
 | Consistência | Casos com a mesma categoria nas 3 execuções ÷ total de casos | 90% ou mais |
 | Tempo por pedido | Média e máximo, em segundos | Até 15 s (a validar) |
 
