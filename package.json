@@ -1,0 +1,27 @@
+{
+  "name": "os-triage",
+  "version": "1.0.0",
+  "description": "Fluxo no n8n que transforma o relato de um cliente de oficina de motos em uma ficha de serviço. O Gemini extrai os dados, e regras em código validam o resultado.",
+  "main": "n8n_mapeamento_marcas.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EduardoHenrick2/OS-Triage.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/EduardoHenrick2/OS-Triage/issues"
+  },
+  "homepage": "https://github.com/EduardoHenrick2/OS-Triage#readme",
+  "dependencies": {
+    "n8n": "^2.45.7",
+    "sqlite3": "^5.1.7"
+  }
+}
