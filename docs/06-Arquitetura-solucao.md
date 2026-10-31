@@ -475,6 +475,10 @@ JavaScript descritas na seção 4.
 1. **Receber o relato.** O formulário envia o texto como campo `relato`.
 2. **Chamar o Gemini.** O nó envia o relato delimitado como dado, junto com a instrução e
    o esquema.
+   **Passo 2.1 (enriquecimento em código).** O sistema passa o JSON bruto por um nó de
+   Código (JavaScript). O script limpa artigos e pronomes do campo `modelo_moto`, normaliza
+   a string e cruza com uma tabela estática para concatenar a marca correta (por exemplo, de
+   "CG 160" para "Honda CG 160"). Modelos não mapeados passam sem alteração.
 3. **Validar estrutura e categoria.** Funções da seção 4.2 e 4.3.
 4. **Confirmar dados e campos obrigatórios.** Funções da seção 4.4 e 4.5.
 5. **Aplicar a regra de risco.** Função da seção 4.6.
