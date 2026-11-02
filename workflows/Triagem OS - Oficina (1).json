@@ -1,0 +1,83 @@
+{
+  "name": "Triagem OS - Oficina",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "triagem-teste",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "abc56b9f-6bff-4bdd-a983-428a04efcce0",
+      "name": "Webhook - Entrada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        16
+      ],
+      "webhookId": "test-webhook-oficina"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-3.1-flash-lite",
+          "mode": "list",
+          "cachedResultName": "Gemini 3.1 Flash Lite"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=={{ 'És um assistente de triagem de uma oficina de motos. Analisa o seguinte relato e extrai os dados num JSON estrito com as chaves: \"marca_moto\", \"sintoma\" e \"pecas_mencionadas\". Relato: ' + $json.body.relato }}",
+              "role": "=user"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        16
+      ],
+      "id": "f604f0a6-40e4-4ac6-b951-ce7f8b4f7b7d",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "j4RQTwpf3Fl7sBy1",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook - Entrada": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "1a8be8ae-9959-4100-9a0d-f23bd48391b0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6da151b27b273b34070ca088ae5dbde39f643bd3402900f1ec6708c04d893291"
+  },
+  "nodeGroups": [],
+  "id": "Q15KXutn7JatQWUZ",
+  "tags": []
+}
