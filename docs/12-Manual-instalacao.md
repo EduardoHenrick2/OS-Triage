@@ -47,11 +47,11 @@ Se o Docker Desktop não iniciar, consulte a seção 6.
 
 ## 3. Clonar o repositório
 
-Copie o endereço do repositório na página do projeto no GitHub e rode:
+Clone o [repositório no GitHub](https://github.com/EduardoHenrick2/OS-Triage) e rode:
 
 ```powershell
-git clone <endereço do repositório>
-cd "OS Triage"
+git clone https://github.com/EduardoHenrick2/OS-Triage.git
+cd OS-Triage
 ```
 
 ---

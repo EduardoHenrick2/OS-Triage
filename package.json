@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/EduardoHenrick2/OS-Triage#readme",
   "dependencies": {
-    "n8n": "^2.45.7",
+    "n8n": "2.45.6",
     "sqlite3": "^5.1.7"
   }
 }

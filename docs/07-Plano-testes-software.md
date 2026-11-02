@@ -117,6 +117,8 @@ pela regra do conjunto. 5 casos com ação esperada "perguntar" e 19 com "gravar
 
 ### 5.2 Gabarito
 
+Gabarito de validação congelado em 01/11/2026 no commit dcd385f.
+
 Todos os dados são fictícios. Ação: **gravar** ou **perguntar**. Quando a ação é
 perguntar, a categoria e a urgência ainda são registradas, mas a ficha não é gravada.
 O campo `null` indica dado que não está no relato.
