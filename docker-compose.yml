@@ -20,9 +20,25 @@ services:
       # Workflows, credenciais criptografadas e a chave de criptografia do n8n.
       - n8n_data:/home/node/.n8n
       # Fichas e resultados dos testes, visíveis na pasta data/ do projeto.
-      # O caminho dentro do contêiner ainda precisa ser confirmado na Fase 1.
       - ./data:/home/node/.n8n-files
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: os_triage_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=oficina
+      - POSTGRES_PASSWORD=oficina_senha
+      - POSTGRES_DB=os_triage
+    ports:
+      # Publicado somente em localhost por segurança.
+      - "127.0.0.1:5432:5432"
+    volumes:
+      # Garante que os dados da base de dados não se perdem ao reiniciar
+      - pg_data:/var/lib/postgresql/data
 
 volumes:
   n8n_data:
     name: os_triage_n8n_data
+  pg_data:
+    name: os_triage_pg_data
